@@ -6,7 +6,7 @@
 //
 
 import UserNotifications
-//import MomagiciOSSDK
+import MomagiciOSSDK
 
 class NotificationService: UNNotificationServiceExtension {
   var contentHandler: ((UNNotificationContent) -> Void)?
@@ -19,7 +19,7 @@ class NotificationService: UNNotificationServiceExtension {
     self.contentHandler = contentHandler
       bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
     if let bestAttemptContent = bestAttemptContent {
-      //  DATB.didReceiveNotificationExtensionRequest(bundleName :"com.example.momagicFlutterExample", soundName: "", isBadge: false, request: receivedRequest, bestAttemptContent: bestAttemptContent,contentHandler: contentHandler)
+        DATB.didReceiveNotificationExtensionRequest(bundleName :"com.example.momagicFlutterExample", soundName: "", isBadge: false, request: receivedRequest, bestAttemptContent: bestAttemptContent,contentHandler: contentHandler)
       }
   }
   

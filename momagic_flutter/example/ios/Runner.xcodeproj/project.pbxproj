@@ -17,6 +17,7 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		D81C3068887263657A019E38 /* Pods_MoMagicNotificationExtensionServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B455973CA85F07D85F2978 /* Pods_MoMagicNotificationExtensionServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,10 +62,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		001E2458E9651078145C2C12 /* Pods-MoMagicNotificationExtensionServices.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoMagicNotificationExtensionServices.profile.xcconfig"; path = "Target Support Files/Pods-MoMagicNotificationExtensionServices/Pods-MoMagicNotificationExtensionServices.profile.xcconfig"; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		331C8081294A63A400263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		33B455973CA85F07D85F2978 /* Pods_MoMagicNotificationExtensionServices.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoMagicNotificationExtensionServices.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		59412AFE9A602723136D6647 /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
 		6C1395352CEF0125006B8298 /* RunnerDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RunnerDebug.entitlements; sourceTree = "<group>"; };
@@ -73,6 +76,7 @@
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		763D33C0E0FA6F970DD2BFAF /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77008E5D9A60B2E58AD16108 /* Pods-MoMagicNotificationExtensionServices.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoMagicNotificationExtensionServices.release.xcconfig"; path = "Target Support Files/Pods-MoMagicNotificationExtensionServices/Pods-MoMagicNotificationExtensionServices.release.xcconfig"; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9050EB11BBD671FFA6009AE /* Pods-MoMagicNotificationExtensionServices.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoMagicNotificationExtensionServices.debug.xcconfig"; path = "Target Support Files/Pods-MoMagicNotificationExtensionServices/Pods-MoMagicNotificationExtensionServices.debug.xcconfig"; sourceTree = "<group>"; };
 		C2C082E16B4721D70F94340A /* Pods-RunnerTests.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile.xcconfig"; sourceTree = "<group>"; };
 		D65A0F8A5BA03EFC8361EA72 /* Pods-RunnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.debug.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D8FB33E19CE81D63882251E5 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
@@ -115,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D81C3068887263657A019E38 /* Pods_MoMagicNotificationExtensionServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +198,7 @@
 			children = (
 				763D33C0E0FA6F970DD2BFAF /* Pods_Runner.framework */,
 				E05D1DF3BAEB36CE12E76EFB /* Pods_RunnerTests.framework */,
+				33B455973CA85F07D85F2978 /* Pods_MoMagicNotificationExtensionServices.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -205,6 +212,9 @@
 				D65A0F8A5BA03EFC8361EA72 /* Pods-RunnerTests.debug.xcconfig */,
 				59412AFE9A602723136D6647 /* Pods-RunnerTests.release.xcconfig */,
 				C2C082E16B4721D70F94340A /* Pods-RunnerTests.profile.xcconfig */,
+				A9050EB11BBD671FFA6009AE /* Pods-MoMagicNotificationExtensionServices.debug.xcconfig */,
+				77008E5D9A60B2E58AD16108 /* Pods-MoMagicNotificationExtensionServices.release.xcconfig */,
+				001E2458E9651078145C2C12 /* Pods-MoMagicNotificationExtensionServices.profile.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -235,6 +245,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6C1395432CEF2132006B8298 /* Build configuration list for PBXNativeTarget "MoMagicNotificationExtensionServices" */;
 			buildPhases = (
+				23D36E0FA7A5C9653FC8F924 /* [CP] Check Pods Manifest.lock */,
 				6C1395362CEF2132006B8298 /* Sources */,
 				6C1395372CEF2132006B8298 /* Frameworks */,
 				6C1395382CEF2132006B8298 /* Resources */,
@@ -348,6 +359,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		23D36E0FA7A5C9653FC8F924 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MoMagicNotificationExtensionServices-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3B06AD1E1E4923F5004D2608 /* Thin Binary */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -628,6 +661,7 @@
 		};
 		6C1395442CEF2132006B8298 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9050EB11BBD671FFA6009AE /* Pods-MoMagicNotificationExtensionServices.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -645,7 +679,7 @@
 				INFOPLIST_FILE = MoMagicNotificationExtensionServices/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MoMagicNotificationExtensionServices;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -668,6 +702,7 @@
 		};
 		6C1395452CEF2132006B8298 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 77008E5D9A60B2E58AD16108 /* Pods-MoMagicNotificationExtensionServices.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -684,7 +719,7 @@
 				INFOPLIST_FILE = MoMagicNotificationExtensionServices/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MoMagicNotificationExtensionServices;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -704,6 +739,7 @@
 		};
 		6C1395462CEF2132006B8298 /* Profile */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 001E2458E9651078145C2C12 /* Pods-MoMagicNotificationExtensionServices.profile.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -720,7 +756,7 @@
 				INFOPLIST_FILE = MoMagicNotificationExtensionServices/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MoMagicNotificationExtensionServices;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

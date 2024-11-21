@@ -11,6 +11,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
   - momagic_flutter (from `.symlinks/plugins/momagic_flutter/ios`)
+  - MomagiciOSSDK
 
 SPEC REPOS:
   trunk:
@@ -30,6 +31,6 @@ SPEC CHECKSUMS:
   momagic_flutter: a67960544be22b0c0a001c7a221deb70112d703a
   MomagiciOSSDK: 5c23bf7687ab5f47651fa4f6096680b10053c3cf
 
-PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
+PODFILE CHECKSUM: 16ad369f2cd5ad2ca0cc1697e4bde6c16a980fd3
 
 COCOAPODS: 1.16.2
