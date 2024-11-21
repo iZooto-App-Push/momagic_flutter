@@ -1,0 +1,35 @@
+PODS:
+  - Flutter (1.0.0)
+  - integration_test (0.0.1):
+    - Flutter
+  - momagic_flutter (0.0.1):
+    - Flutter
+    - MomagiciOSSDK
+  - MomagiciOSSDK (3.0.1)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
+  - momagic_flutter (from `.symlinks/plugins/momagic_flutter/ios`)
+
+SPEC REPOS:
+  trunk:
+    - MomagiciOSSDK
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
+  momagic_flutter:
+    :path: ".symlinks/plugins/momagic_flutter/ios"
+
+SPEC CHECKSUMS:
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  integration_test: 252f60fa39af5e17c3aa9899d35d908a0721b573
+  momagic_flutter: a67960544be22b0c0a001c7a221deb70112d703a
+  MomagiciOSSDK: 5c23bf7687ab5f47651fa4f6096680b10053c3cf
+
+PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
+
+COCOAPODS: 1.16.2
