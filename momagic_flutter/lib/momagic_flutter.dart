@@ -53,6 +53,7 @@ const String IZ_EMAIL = "email";
 const String IZ_FIRST_NAME = "firstName";
 const String IZ_LAST_NAME = "lastName";
 const String IZ_ONE_TAP_CALLBACK = "oneTapCallback";
+const String SETSUBSCRIBERID = "setSubscriberId";
 
 // handle the text-overlay template
 enum PushTemplate {
@@ -110,7 +111,11 @@ class DATB {
     _channel.invokeMethod(SETSUBSCRIPTION, enable);
      
   }
-  
+  // setSubscriber ID
+
+  static setSubscriberID(String subscriberID) async {
+    _channel.invokeMethod(SETSUBSCRIBERID, subscriberID); 
+  }
 
   static Future<String?> receiveToken() async {
     final String? receiveToken = await _channel.invokeMethod(DEVICETOKEN);

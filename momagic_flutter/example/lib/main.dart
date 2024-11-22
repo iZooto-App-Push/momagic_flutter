@@ -75,6 +75,7 @@ class _HomeState extends State<Home> {
               DATB.iOSInit(
               appId: "d7e40672e1d6bad8c3ef6ecb0291cf4ab8e11b87");       // for iOS
           }
+          DATB.setSubscriberID("6575678");
          DATB.shared.onTokenReceived((token){
               print('Token >>  $token ');
 

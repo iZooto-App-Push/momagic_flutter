@@ -34,4 +34,6 @@ class AppConstant
     static var IZ_PLUGIN_IS_PAGINATION = "isPagination" //enable
     static var IZ_PLUGIN_IS_ENABLE = "enable"
     static var IZ_PLUGIN_IS_NONE = "NONE"
+    static var IZ_PLUGIN_SUBSCRIBER_ID = "setSubscriberId"
+
 }
