@@ -88,7 +88,7 @@ public class MoMagicFlutterPlugin implements FlutterPlugin, MethodChannel.Method
                 }
                 break;
 
-            case iZootoConstant.IZ_SET_SUBSCRIPTION:
+            case MoMagicConstant.IZ_SET_SUBSCRIPTION:
                 try {
                     boolean setSubscription = (boolean) call.arguments;
                     DATB.setSubscription(setSubscription);
@@ -97,7 +97,7 @@ public class MoMagicFlutterPlugin implements FlutterPlugin, MethodChannel.Method
                 }
                 break;
 
-            case iZootoConstant.IZ_FIREBASE_ANALYTICS:
+            case MoMagicConstant.IZ_FIREBASE_ANALYTICS:
                 try {
                     boolean trackFirebaseAnalytics = (boolean) call.arguments;
                     DATB.setFirebaseAnalytics(trackFirebaseAnalytics);
@@ -106,7 +106,7 @@ public class MoMagicFlutterPlugin implements FlutterPlugin, MethodChannel.Method
                 }
                 break;
 
-            case iZootoConstant.IZ_ADD_EVENTS:
+            case MoMagicConstant.IZ_ADD_EVENTS:
                 try {
                     String eventName = call.argument(MoMagicConstant.IZ_EVENT_NAME);
                     HashMap<String, Object> hashMapEvent = new HashMap<>();
@@ -117,7 +117,7 @@ public class MoMagicFlutterPlugin implements FlutterPlugin, MethodChannel.Method
                 }
                 break;
 
-            case iZootoConstant.IZ_ADD_PROPERTIES:
+            case MoMagicConstant.IZ_ADD_PROPERTIES:
                 try {
                     HashMap<String, Object> hashMapUserProperty = new HashMap<>();
                     hashMapUserProperty = (HashMap<String, Object>) call.arguments;
@@ -127,7 +127,7 @@ public class MoMagicFlutterPlugin implements FlutterPlugin, MethodChannel.Method
                 }
                 break;
 
-            case iZootoConstant.IZ_NOTIFICATION_SOUND:
+            case MoMagicConstant.IZ_NOTIFICATION_SOUND:
                 try {
                     String soundName = (String) call.arguments;
                     DATB.setNotificationSound(soundName);
@@ -136,7 +136,7 @@ public class MoMagicFlutterPlugin implements FlutterPlugin, MethodChannel.Method
                 }
                 break;
 
-            case iZootoConstant.IZ_ADD_TAGS:
+            case MoMagicConstant.IZ_ADD_TAGS:
                 try {
                     List<String> addTagList = new ArrayList<>();
                     addTagList = (List<String>) call.arguments;
@@ -146,7 +146,7 @@ public class MoMagicFlutterPlugin implements FlutterPlugin, MethodChannel.Method
                 }
                 break;
 
-            case iZootoConstant.IZ_REMOVE_TAG:
+            case MoMagicConstant.IZ_REMOVE_TAG:
                 try {
                     List<String> addTagList = new ArrayList<>();
                     addTagList = (List<String>) call.arguments;

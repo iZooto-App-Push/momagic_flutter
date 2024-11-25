@@ -100,7 +100,7 @@ import MomagiciOSSDK
             }
             break;
         case AppConstant.IZ_PLUGIN_SUBSCRIBER_ID:
-                    guard let subscriberId = call.arguments as? String, !subscriberId.isEmpty else {
+                    guard let subscriberId = call.arguments as? String else {
                         print("Error: 'Subscriber ID' is either not a String or is empty")
                         return
                     }
