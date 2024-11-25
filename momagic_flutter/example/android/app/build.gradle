@@ -28,6 +28,9 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        manifestPlaceholders = [
+                momagic_app_id : "ea264c5a9f3a6e9b5dd3734bc83b0f61ee8f6547"
+        ]
     }
 
     buildTypes {

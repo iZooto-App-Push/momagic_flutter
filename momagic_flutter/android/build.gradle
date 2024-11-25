@@ -52,8 +52,11 @@ android {
     dependencies {
         testImplementation("org.jetbrains.kotlin:kotlin-test")
         testImplementation("org.mockito:mockito-core:5.0.0")
-        implementation 'com.momagic:notification-sdk:2.4.1'
 
+        // moMagic_sdk and required library
+        implementation 'com.momagic:notification-sdk:2.4.0'
+        implementation 'com.google.firebase:firebase-messaging:24.1.0'
+        implementation 'com.google.code.gson:gson:2.10.1'
     }
 
     testOptions {

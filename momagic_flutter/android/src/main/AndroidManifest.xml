@@ -1,3 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.example.momagic_flutter">
+    package="com.example.momagic_flutter">
+    <application android:theme="@style/Theme.AppCompat.NoActionBar" />
 </manifest>

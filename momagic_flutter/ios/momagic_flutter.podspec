@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'momagic_flutter'
-  s.version          = '0.0.2'
+  s.version          = '0.0.3'
   s.summary          = 'The MoMagic Flutter SDK'
   s.description      = 'Allows you to easily add MoMagic to your flutter projects, to make sending and handling push notifications easy'
   s.homepage         = 'http://izooto.com'
