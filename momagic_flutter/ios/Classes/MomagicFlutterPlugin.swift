@@ -48,7 +48,7 @@ import MomagiciOSSDK
                 return
             }
             
-            let momagicInitSettings = [AppConstant.IZ_PLUGIN_AUTO_PROMPT: true,AppConstant.IZ_PLUGIN_IS_WEBVIEW: true,AppConstant.IZ_PLUGIN_PROVISIONAL_AUTH:false]
+            let momagicInitSettings = [AppConstant.IZ_PLUGIN_AUTO_PROMPT: true,AppConstant.IZ_PLUGIN_IS_WEBVIEW: false,AppConstant.IZ_PLUGIN_PROVISIONAL_AUTH:false]
             DATB.initialisation(momagic_app_id: appId, application: UIApplication.shared,  initSetting:momagicInitSettings)
             UNUserNotificationCenter.current().delegate = self
             DATB.notificationOpenDelegate = self
@@ -99,15 +99,15 @@ import MomagiciOSSDK
                 }
             }
             break;
-        case AppConstant.IZ_PLUGIN_SUBSCRIBER_ID:
-                    guard let subscriberId = call.arguments as? String else {
-                        print("Error: 'Subscriber ID' is either not a String or is empty")
-                        return
-                    }
-                    DATB.setSubscriberID(subscriberID: subscriberId)
-                    break;
-                    
+
+            case AppConstant.IZ_PLUGIN_SUBSCRIBER_ID:
+            guard let subscriberId = call.arguments as? String else {
+                print("Error: 'Subscriber ID ' is not a String ")
+                return
+            }
             
+            DATB.setSubscriberID(subscriberID: subscriberId)
+            break;
             
         default:
             result(AppConstant.IZ_PLUGIN_NOT_RESULT)

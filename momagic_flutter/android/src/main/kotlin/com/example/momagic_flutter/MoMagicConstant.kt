@@ -1,7 +1,7 @@
 package com.example.momagic_flutter
 
 object MoMagicConstant {
-    const val IZ_PLUGIN_VERSION: String = "fv_1.0.0"
+    const val IZ_PLUGIN_VERSION: String = "fv_1.0.2"
     const val IZ_ANDROID_INIT: String = "DATBAndroidInit"
     const val IZ_SET_SUBSCRIPTION: String = "DATBSetSubscription"
     const val IZ_FIREBASE_ANALYTICS: String = "DATBFirebaseAnalytics"
@@ -24,6 +24,7 @@ object MoMagicConstant {
     const val IZ_CHANNEL_NAME: String = "setNotificationChannelName"
     const val IZ_NAVIGATE_SETTING: String = "navigateToSettings"
     const val IZ_API_LEVEL_ERROR: String = "Notification permission not required"
-    const val IZ_PLUGIN_SUBSCRIBER_ID = "setSubscriberId"
+    const val IZ_PLUGIN_SUBSCRIBER_ID: String = "setSubscriberId"
+    const val IZ_DEFAULT_WEB_VIEW: String = "defaultWebView"
 
 }

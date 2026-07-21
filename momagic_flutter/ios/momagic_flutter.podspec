@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'momagic_flutter'
-  s.version          = '0.0.3'
+  s.version          = '1.0.2'
   s.summary          = 'The MoMagic Flutter SDK'
   s.description      = 'Allows you to easily add MoMagic to your flutter projects, to make sending and handling push notifications easy'
   s.homepage         = 'http://izooto.com'
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.author           = { 'Amit Kumar Gupta' => 'amit@datability.co' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
- s.public_header_files = 'Classes/**/*.h'
+  s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   s.platform = :ios, '12.0'
 

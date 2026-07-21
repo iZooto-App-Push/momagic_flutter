@@ -1,59 +1,44 @@
+// ignore_for_file: constant_identifier_names
+
 import 'dart:io';
 import 'dart:collection';
 import 'dart:async';
-import 'dart:ui';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 export 'package:momagic_flutter/src/DATBConnection.dart';
 export 'package:momagic_flutter/DATBApns.dart';
 
-typedef void ReceiveNotificationParam(String? payload);
-typedef void OpenedNotificationParam(String? data);
-typedef void TokenNotificationParam(String? token);
-typedef void WebViewNotificationParam(String? landingUrl);
-typedef void OneTapResponse(String? response);
+typedef ReceiveNotificationParam = void Function(String? payload);
+typedef OpenedNotificationParam = void Function(String? data);
+typedef TokenNotificationParam = void Function(String? token);
+typedef WebViewNotificationParam = void Function(String? landingUrl);
 
+const String FLUTTERSDKNAME = "momagic_flutter";
+const String ANDROIDINIT = "DATBAndroidInit";
+const String iOSINIT = "iOSInit";
+const String iOSAPPID = "appId";
+const String SUBSCRIBER_ID = "setSubscriberId";
 const String PLUGIN_NAME = "momagic_flutter";
-const String RECEIVE_PAYLOAD = "receivedPayload"; //receivedPayload
+const String RECEIVE_PAYLOAD = "receivedPayload";
+const String DEEPLINKNOTIFICATION = "openNotification";
+const String HANDLELANDINGURL = "handleLandingURL";
 const String ADDUSERPROPERTIES = "addUserProperties";
 const String SETSUBSCRIPTION = "DATBSetSubscription";
 const String DEVICETOKEN = "onToken";
-const String DEEPLINKNOTIFICATION = "openNotification"; //openNotification
-const String IZ_NOTIFICATION_DATA = "getNotificationFeed";
-const String LANDINGURL = "receiveLandingURL";
 const String FIREBASEANALYTICS = "DATBFirebaseAnalytics";
-const String ANDROIDINIT = "DATBAndroidInit";
 const String NOTIFICATIONSOUND = "notificationSound";
 const String EVENTS = "DATBAddEvents";
 const String PROPERTIES = "DATBAddProperties";
 const String ADDTAG = "DATBAddTags";
 const String REMOVETAG = "DATBRemoveTags";
-const String HANDLENOTIFICATION = "DATBHandleNotification";
-const String HANDLELANDINGURL = "handleLandingURL"; //handleLandingURL
 const String NOTIFICATIONPREVIEW = "DATBDefaultTemplate";
 const String NOTIFICATIONBANNERIMAGE = "DATBDefaultNotificationBanner";
-const String ENABLE = "enable";
 const String KEYEVENTNAME = "eventName";
 const String KEYEVENTVALUE = "eventValue";
-const String iOSINIT = "iOSInit";
-const String iOSAPPID = "appId";
-const String FLUTTERSDKNAME = "momagic_flutter";
-const NOTIFICATION_PERMISSION = "notificationPermission";
-const IZ_CHANNEL_NAME = "setNotificationChannelName";
-const IZ_NAVIGATE_SETTING = "navigateToSettings";
-const IZ_GET_NOTIFICATION_FEED = "getNotificationFeed";
-const IZ_IS_PAGINATION = "isPagination";
-const IZ_IS_GOOGLE_ONE_TAP = "google_one_tap";
+const String NOTIFICATION_PERMISSION = "notificationPermission";
+const String CHANNEL_NAME = "setNotificationChannelName";
+const String NAVIGATE_SETTING = "navigateToSettings";
+const String DEFAULT_WEB_VIEW = "defaultWebView";
 
-// OneTap support
-const String IZ_REQUEST_ONE_TAP_ACTIVITY = "requestOneTapActivity";
-const String IZ_SYNC_USER_DETAILS = "syncUserDetails"; // android/ios
-const String IZ_EMAIL = "email";
-const String IZ_FIRST_NAME = "firstName";
-const String IZ_LAST_NAME = "lastName";
-const String IZ_ONE_TAP_CALLBACK = "oneTapCallback";
-const String SETSUBSCRIBERID = "setSubscriberId";
 
 // handle the text-overlay template
 enum PushTemplate {
@@ -64,57 +49,55 @@ enum PushTemplate {
 }
 
 class DATB {
-  static DATB shared = new DATB();
-  static const MethodChannel _channel = const MethodChannel(FLUTTERSDKNAME);
+  static DATB shared = DATB();
+  static const MethodChannel _channel = MethodChannel(FLUTTERSDKNAME);
   static ReceiveNotificationParam? notificationReceiveData;
   static OpenedNotificationParam? notificationOpenedData;
   static TokenNotificationParam? notificationToken;
   static WebViewNotificationParam? notificationWebView;
-  static OneTapResponse? dataResponse;
 
   DATB() {
     _channel.setMethodCallHandler(handleOverrideMethod);
   }
 
- // for integration ios
-  static Future<void> iOSInit({
-    required String appId}) async {
-    await _channel.invokeMethod(iOSINIT, {
-      iOSAPPID: appId
-    });
+  // For integration ios
+  static Future<void> iOSInit({required String appId}) async {
+    await _channel.invokeMethod(iOSINIT, {iOSAPPID: appId});
   }
-   // This method supports on all plateform(Android/iOS)
-  static addUserProperty(String key, String value) async {
-    if(Platform.isIOS){
+
+  // For Android init (optional defultWebView boolean parameter)
+  static Future<void> androidInit({bool isDefaultWebView = false}) async {
+    await _channel.invokeMethod(ANDROIDINIT, {DEFAULT_WEB_VIEW: isDefaultWebView});
+  }
+
+static addUserProperty(String key, dynamic value) async {
+  if (Platform.isIOS) {
     _channel.invokeMethod(ADDUSERPROPERTIES, {
       'key': key,
       'value': value,
     });
-    }else{
-      Map<String, Object> addValue = HashMap();
-      addValue[key] = value;
-     _channel.invokeMethod(PROPERTIES, addValue);
-
-    }
+  } else {
+    Map<String, dynamic> addValue = {};
+    addValue[key] = value;
+    _channel.invokeMethod(PROPERTIES, addValue);
   }
+}
 
- // For lagecy method used in iOS, this method will be deprecated asap
-   static addUserProperties(String key, String value) async {
+
+  // For lagecy method used in iOS, this method will be deprecated asap
+  static addUserProperties(String key, String value) async {
     _channel.invokeMethod(ADDUSERPROPERTIES, {
       'key': key,
       'value': value,
-    });  
-
-    //setSubscription
+    });
   }
+
   static setSubscription(bool enable) async {
     _channel.invokeMethod(SETSUBSCRIPTION, enable);
-     
   }
-  // setSubscriber ID
 
-  static setSubscriberID(String subscriberID) async {
-    _channel.invokeMethod(SETSUBSCRIBERID, subscriberID); 
+  static Future<void> setSubscriberId(String subscriberId) async {
+    await _channel.invokeMethod(SUBSCRIBER_ID, subscriberId);
   }
 
   static Future<String?> receiveToken() async {
@@ -138,19 +121,8 @@ class DATB {
         await _channel.invokeMethod(HANDLELANDINGURL);
     return receiveLandingURL;
   }
- 
-  // Notification Feed Data
-   static Future<String> getNotificationFeed(bool isPagination) async {
-     String returnData = await _channel.invokeMethod(IZ_GET_NOTIFICATION_FEED,{IZ_IS_PAGINATION:isPagination});
-     return returnData;
-   }
 
-  static Future<void> androidInit(bool isDefaultWebView) async {
-    await _channel.invokeMethod(ANDROIDINIT, isDefaultWebView);
-
-  }
-
-  static Future<void> setFirebaseAnalytics(bool enable) async { 
+  static Future<void> setFirebaseAnalytics(bool enable) async {
     await _channel.invokeMethod(FIREBASEANALYTICS, enable);
   }
 
@@ -172,12 +144,7 @@ class DATB {
     await _channel.invokeMethod(REMOVETAG, topicName);
   }
 
-  static Future<void> handleNotification(dynamic data) async {
-    await _channel.invokeMethod(HANDLENOTIFICATION, {HANDLENOTIFICATION: data});
-  }
-
-     /* handled back event*/
-
+  /* handled back event*/
   void onNotificationReceived(ReceiveNotificationParam payload) {
     notificationReceiveData = payload;
     _channel.invokeMethod(RECEIVE_PAYLOAD);
@@ -198,11 +165,9 @@ class DATB {
     _channel.invokeMethod(HANDLELANDINGURL);
   }
 
-  static Future<void> setDefaultTemplate(
-      PushTemplate option) async {
-    await _channel.invokeMethod(NOTIFICATIONPREVIEW,
-        {NOTIFICATIONPREVIEW: option.index});
-
+  static Future<void> setDefaultTemplate(PushTemplate option) async {
+    await _channel
+        .invokeMethod(NOTIFICATIONPREVIEW, {NOTIFICATIONPREVIEW: option.index});
   }
 
   static Future<void> promptForPushNotifications() async {
@@ -216,55 +181,26 @@ class DATB {
 
   // setNotificationChannelName
   static setNotificationChannelName(String channelName) async {
-    _channel.invokeMethod(IZ_CHANNEL_NAME, channelName);
+    _channel.invokeMethod(CHANNEL_NAME, channelName);
   }
 
   // navigateToNotificationSettings
   static navigateToSettings() async {
-    _channel.invokeMethod(IZ_NAVIGATE_SETTING);
-  }
-   
-  // OneTap Activity Request
-  static Future<void> requestOneTapActivity() async {
-    await _channel.invokeMethod(IZ_REQUEST_ONE_TAP_ACTIVITY);
-  }
-
-  // OneTap callback Response
-  void oneTapResponse(OneTapResponse response) {
-     dataResponse = response;
-    _channel.invokeMethod(IZ_ONE_TAP_CALLBACK);
-  }
-  
-  // Method to get user details Android/iOSsyncUserDetailsEmail
-  static syncUserDetailsEmail(String email, String firstName, String lastName){
-    if (Platform.isAndroid){
-    Map<String, String> userConfigs = { IZ_EMAIL : email, IZ_FIRST_NAME : firstName, IZ_LAST_NAME : lastName };
-    _channel.invokeMethod(IZ_SYNC_USER_DETAILS, userConfigs);
-  }
-  else{
-      _channel.invokeMethod(IZ_SYNC_USER_DETAILS, {
-      'email': email,
-      'fName': firstName,
-      'lName':lastName,
-    });  
-  }
-
+    _channel.invokeMethod(NAVIGATE_SETTING);
   }
 
   Future<Null> handleOverrideMethod(MethodCall methodCall) async {
     if (methodCall.method == RECEIVE_PAYLOAD &&
         notificationReceiveData != null) {
-        notificationReceiveData!(methodCall.arguments);
+      notificationReceiveData!(methodCall.arguments);
     } else if (methodCall.method == DEEPLINKNOTIFICATION &&
         notificationOpenedData != null) {
-        notificationOpenedData!(methodCall.arguments);
+      notificationOpenedData!(methodCall.arguments);
     } else if (methodCall.method == DEVICETOKEN && notificationToken != null) {
-        notificationToken!(methodCall.arguments);
+      notificationToken!(methodCall.arguments);
     } else if (methodCall.method == HANDLELANDINGURL &&
         notificationWebView != null) {
-        notificationWebView!(methodCall.arguments);
-    } else if (methodCall.method == IZ_ONE_TAP_CALLBACK && dataResponse != null){
-        dataResponse!(methodCall.arguments);
+      notificationWebView!(methodCall.arguments);
     }
   }
 }

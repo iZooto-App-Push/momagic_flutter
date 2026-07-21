@@ -3,6 +3,7 @@ plugins {
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"
 }
 
 android {
@@ -28,9 +29,12 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+//cf1739879e7bf5779613fb74e485c4da2eabe899
+        // moMagic manifest-placeholder
         manifestPlaceholders = [
-                momagic_app_id : "ea264c5a9f3a6e9b5dd3734bc83b0f61ee8f6547"
+                momagic_app_id : "41feb4a969505ac8511e013e1b57948e2a35ee79"
         ]
+
     }
 
     buildTypes {
@@ -39,6 +43,11 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.debug
         }
+    }
+
+    dependencies {
+        implementation 'androidx.appcompat:appcompat:1.6.1'
+        implementation 'androidx.work:work-runtime:2.8.1'
     }
 }
 

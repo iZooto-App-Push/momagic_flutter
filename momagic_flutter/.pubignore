@@ -1,0 +1,5 @@
+.dart_tool/
+momagic_flutter.iml
+pubspec.lock`
+example/android/app/google-services.json
+

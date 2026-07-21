@@ -10,8 +10,10 @@ import com.google.gson.Gson
 import com.momagic.AppConstant
 import com.momagic.DATB
 import com.momagic.NotificationHelperListener
+import com.momagic.NotificationReceiveHybridListener
 import com.momagic.NotificationWebViewListener
 import com.momagic.Payload
+import com.momagic.PreferenceUtil
 import com.momagic.PushTemplate
 import com.momagic.TokenReceivedListener
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -21,6 +23,8 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import org.json.JSONArray
+
 
 /** MomagicFlutterPlugin */
 class MomagicFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
@@ -58,7 +62,8 @@ class MomagicFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         try {
             context = flutterPluginBinding.applicationContext
-            channel = MethodChannel(flutterPluginBinding.binaryMessenger, MoMagicConstant.IZ_PLUGIN_NAME)
+            channel =
+                MethodChannel(flutterPluginBinding.binaryMessenger, MoMagicConstant.IZ_PLUGIN_NAME)
             channel.setMethodCallHandler(this)
         } catch (ex: Exception) {
             Log.d(TAG, ex.toString())
@@ -76,16 +81,36 @@ class MomagicFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     override fun onMethodCall(call: MethodCall, result: Result) {
         try {
             val moMagicNotificationListener = MoMagicNotificationListener()
+            val preferenceUtil = PreferenceUtil.getInstance(context)
 
             when (call.method) {
 
                 MoMagicConstant.IZ_ANDROID_INIT -> {
                     try {
-                        DATB.initialize(context)
-                            .setTokenReceivedListener(moMagicNotificationListener)
-                            .setNotificationReceiveListener(moMagicNotificationListener)
-                            .setLandingURLListener(moMagicNotificationListener)
-                            .build()
+                        DATB.isHybrid = true
+                        val isDefaultWebView =
+                            call.argument<Boolean>(MoMagicConstant.IZ_DEFAULT_WEB_VIEW) ?: false
+                        preferenceUtil.setBooleanData(
+                            AppConstant.IZ_DEFAULT_WEB_VIEW,
+                            isDefaultWebView
+                        )
+
+                        if (isDefaultWebView) {
+                            DATB.initialize(context)
+                                .setTokenReceivedListener(moMagicNotificationListener)
+                                .setNotificationReceiveListener(moMagicNotificationListener)
+                                .setNotificationReceiveHybridListener(moMagicNotificationListener)
+                                .build()
+                        } else {
+                            DATB.initialize(context)
+                                .setTokenReceivedListener(moMagicNotificationListener)
+                                .setNotificationReceiveListener(moMagicNotificationListener)
+                                .setNotificationReceiveHybridListener(moMagicNotificationListener)
+                                .setLandingURLListener(moMagicNotificationListener)
+                                .build()
+                        }
+
+                        DATB.setPluginVersion(MoMagicConstant.IZ_PLUGIN_VERSION)
                     } catch (ex: Exception) {
                         Log.e(TAG, ex.toString())
                     }
@@ -121,21 +146,31 @@ class MomagicFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 MoMagicConstant.IZ_ADD_EVENTS -> {
                     try {
                         val eventName = call.argument<String>(MoMagicConstant.IZ_EVENT_NAME)
-                        val hashMapEvent = call.argument<HashMap<String, Any>>(MoMagicConstant.IZ_EVENT_VALUE)
+                        val hashMapEvent =
+                            call.argument<HashMap<String, Any>>(MoMagicConstant.IZ_EVENT_VALUE)
                         DATB.addEvent(eventName, hashMapEvent)
                     } catch (ex: Exception) {
                         Log.e(MoMagicConstant.IZ_PLUGIN_EXCEPTION, ex.toString())
                     }
                 }
 
-                MoMagicConstant.IZ_ADD_PROPERTIES -> {
+               MoMagicConstant.IZ_ADD_PROPERTIES -> {
                     try {
-                        val hashMapUserProperty = call.argument<HashMap<String, Any>>(MoMagicConstant.IZ_ADD_PROPERTIES)
-                        DATB.addUserProperty(hashMapUserProperty)
+                        val hashMapUserProperty = call.arguments as? HashMap<String, Any>
+                        if (hashMapUserProperty != null) {
+                            DATB.addUserProperty(hashMapUserProperty)
+                        } else {
+                            Log.e("UserProperties", "Received null map")
+                        }
                     } catch (ex: Exception) {
-                        Log.v(MoMagicConstant.IZ_PLUGIN_EXCEPTION, ex.toString())
+                        Log.e("UserProperties", "Exception", ex)
                     }
                 }
+
+
+
+
+
 
                 MoMagicConstant.IZ_NOTIFICATION_SOUND -> {
                     try {
@@ -166,7 +201,8 @@ class MomagicFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
                 MoMagicConstant.IZ_DEFAULT_TEMPLATE -> {
                     try {
-                        val notificationTemplate = call.argument<Int>(MoMagicConstant.IZ_DEFAULT_TEMPLATE) ?: 0
+                        val notificationTemplate =
+                            call.argument<Int>(MoMagicConstant.IZ_DEFAULT_TEMPLATE) ?: 0
                         setCustomNotification(notificationTemplate)
                     } catch (ex: Exception) {
                         Log.v(MoMagicConstant.IZ_PLUGIN_EXCEPTION, ex.toString())
@@ -175,7 +211,8 @@ class MomagicFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
                 MoMagicConstant.IZ_DEFAULT_NOTIFICATION_BANNER -> {
                     try {
-                        val notificationTemplateBanner = call.argument<String>(MoMagicConstant.IZ_DEFAULT_NOTIFICATION_BANNER)
+                        val notificationTemplateBanner =
+                            call.argument<String>(MoMagicConstant.IZ_DEFAULT_NOTIFICATION_BANNER)
                         notificationTemplateBanner?.let {
                             if (getBadgeIcon(context, it) != 0) {
                                 DATB.setDefaultNotificationBanner(getBadgeIcon(context, it))
@@ -188,11 +225,8 @@ class MomagicFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
                 MoMagicConstant.IZ_RECEIVED_PAYLOAD -> {
                     try {
-
-//                        Log.d(TAG, "receivedPayload $notificationPayload")
-
-//                        moMagicNotificationListener.onNotificationReceivedHybrid(notificationPayload)
-//                        DATB.notificationReceivedCallback(iZootoNotificationListener)
+                        moMagicNotificationListener.onNotificationReceivedHybrid(notificationPayload)
+                        DATB.notificationReceivedCallback(moMagicNotificationListener)
                     } catch (ex: Exception) {
                         Log.v(MoMagicConstant.IZ_PLUGIN_EXCEPTION, ex.toString())
                     }
@@ -201,10 +235,7 @@ class MomagicFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 MoMagicConstant.IZ_OPEN_NOTIFICATION -> {
                     try {
                         moMagicNotificationListener.onNotificationOpened(notificationOpenedData)
-
-//                        Log.d(TAG, "openNotification $notificationOpenedData")
-
-//                        DATB.notificationClick(iZootoNotificationListener)
+                        DATB.notificationClick(moMagicNotificationListener)
                     } catch (ex: Exception) {
                         Log.v(MoMagicConstant.IZ_PLUGIN_EXCEPTION, ex.toString())
                     }
@@ -219,17 +250,14 @@ class MomagicFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 }
 
                 MoMagicConstant.IZ_HANDLE_WEB_VIEW -> {
-//                    if (!preferenceUtil.getBoolean(AppConstant.IZ_DEFAULT_WEB_VIEW)) {
+                    if (!preferenceUtil.getBoolean(AppConstant.IZ_DEFAULT_WEB_VIEW)) {
                         try {
-
-//                            Log.d(TAG, "notificationWebView $notificationWebView")
-
-//                            DATB.onWebView(notificationWebView)
-//                            DATB.notificationWebView(iZootoNotificationListener)
+                            moMagicNotificationListener.onWebView(notificationWebView)
+                            DATB.notificationWebView(moMagicNotificationListener)
                         } catch (ex: Exception) {
                             Log.v(MoMagicConstant.IZ_PLUGIN_EXCEPTION, ex.toString())
                         }
-//                    }
+                    }
                 }
 
                 MoMagicConstant.IZ_CHANNEL_NAME -> {
@@ -254,7 +282,10 @@ class MomagicFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                         if (Build.VERSION.SDK_INT >= 33) {
                             DATB.promptForPushNotifications()
                         } else {
-                            Log.d(MoMagicConstant.IZ_PLUGIN_EXCEPTION, MoMagicConstant.IZ_API_LEVEL_ERROR)
+                            Log.d(
+                                MoMagicConstant.IZ_PLUGIN_EXCEPTION,
+                                MoMagicConstant.IZ_API_LEVEL_ERROR
+                            )
                         }
                     } catch (ex: Exception) {
                         Log.v(MoMagicConstant.IZ_PLUGIN_EXCEPTION, ex.toString())
@@ -308,11 +339,13 @@ class MomagicFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private fun getBadgeIcon(context: Context, setBadgeIcon: String): Int {
         var badgeIcon = 0
         try {
-            val drawableId = context.resources.getIdentifier(setBadgeIcon, "drawable", context.packageName)
+            val drawableId =
+                context.resources.getIdentifier(setBadgeIcon, "drawable", context.packageName)
             if (drawableId != 0) {
                 badgeIcon = drawableId
             } else {
-                val mipmapId = context.resources.getIdentifier(setBadgeIcon, "mipmap", context.packageName)
+                val mipmapId =
+                    context.resources.getIdentifier(setBadgeIcon, "mipmap", context.packageName)
                 if (mipmapId != 0) {
                     badgeIcon = mipmapId
                 }
@@ -325,11 +358,10 @@ class MomagicFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
 
     // MoMagic Listeners Implementation
-    private inner class MoMagicNotificationListener : NotificationHelperListener, NotificationWebViewListener, TokenReceivedListener {
+    private inner class MoMagicNotificationListener : NotificationHelperListener,
+        NotificationWebViewListener, TokenReceivedListener, NotificationReceiveHybridListener {
 
         override fun onNotificationReceived(payload: Payload?) {
-//            Log.d(TAG, "onNotificationReceived $payload")
-
             if (payload != null) {
                 try {
                     val jsonPayload = Gson().toJson(payload)
@@ -341,8 +373,6 @@ class MomagicFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         }
 
         override fun onNotificationOpened(data: String?) {
-//            Log.d(TAG, "onNotificationOpened $data")
-
             notificationOpenedData = data
             if (data != null) {
                 try {
@@ -354,8 +384,6 @@ class MomagicFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         }
 
         override fun onWebView(landingUrl: String?) {
-//            Log.d(TAG, "onWebView $landingUrl")
-
             notificationWebView = landingUrl
             if (landingUrl != null) {
                 try {
@@ -367,12 +395,29 @@ class MomagicFlutterPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         }
 
         override fun onTokenReceived(token: String?) {
-//            Log.d(TAG, "onTokenReceived $token")
-
             notificationToken = token
             if (token != null) {
                 try {
                     invokeMethodOnUiThread(MoMagicConstant.IZ_DEVICE_TOKEN, token)
+                } catch (e: java.lang.Exception) {
+                    Log.v(MoMagicConstant.IZ_PLUGIN_EXCEPTION, e.toString())
+                }
+            }
+        }
+
+        override fun onNotificationReceivedHybrid(data: String?) {
+            notificationPayload = data
+            if (data != null) {
+                try {
+                    val listArray = JSONArray(data)
+                    val reverseList = JSONArray()
+                    if (listArray.length() > 0) {
+                        reverseList.put(listArray.getJSONObject(listArray.length() - 1))
+                    }
+                    invokeMethodOnUiThread(
+                        MoMagicConstant.IZ_RECEIVED_PAYLOAD,
+                        reverseList.toString()
+                    )
                 } catch (e: java.lang.Exception) {
                     Log.v(MoMagicConstant.IZ_PLUGIN_EXCEPTION, e.toString())
                 }
