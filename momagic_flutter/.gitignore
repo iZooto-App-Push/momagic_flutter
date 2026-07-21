@@ -65,5 +65,11 @@ linux/flutter/ephemeral
 .idea/
 *.iml
 
+
+# Firebase
+google-services.json
+**/google-services.json
+
 # Exclude lock files (optional)
+
 pubspec.lock
