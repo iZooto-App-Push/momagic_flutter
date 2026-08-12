@@ -1,7 +1,7 @@
 package com.example.momagic_flutter
 
 object MoMagicConstant {
-    const val IZ_PLUGIN_VERSION: String = "fv_1.0.2"
+    const val IZ_PLUGIN_VERSION: String = "fv_1.0.3-dev"
     const val IZ_ANDROID_INIT: String = "DATBAndroidInit"
     const val IZ_SET_SUBSCRIPTION: String = "DATBSetSubscription"
     const val IZ_FIREBASE_ANALYTICS: String = "DATBFirebaseAnalytics"
