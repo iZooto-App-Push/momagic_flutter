@@ -77,7 +77,7 @@ class _HomeState extends State<Home> {
     DATB.androidInit();
 
     // DATB.androidInit(isDefaultWebView: true);
-    
+
     DATB.promptForPushNotifications();
 
     //DATB.setSubscriberId("79057172");
@@ -88,10 +88,10 @@ class _HomeState extends State<Home> {
 
     // AddEvent
     // Map<String, Object> eventValue = {};
-    // eventValue['name'] = 'Alice';         
-    // eventValue['age'] = 25;              
-    // eventValue['isStudent'] = true;        
-    // eventValue['skills'] = ['Dart', 'Flutter']; 
+    // eventValue['name'] = 'Alice';
+    // eventValue['age'] = 25;
+    // eventValue['isStudent'] = true;
+    // eventValue['skills'] = ['Dart', 'Flutter'];
     // DATB.addEvent("eventName", eventValue);
 
     // Add Tag
@@ -99,7 +99,7 @@ class _HomeState extends State<Home> {
     // DATB.addTag(topicName);
 
     // AddUserProperties
-     DATB.addUserProperty("tuesday","2026-07-20 16:04:05");
+    DATB.addUserProperty("tuesday", "2026-07-20 16:04:05");
 
     // Remove TAG
     // DATB.removeTag(topicName);
@@ -108,7 +108,7 @@ class _HomeState extends State<Home> {
     // DATB.setDefaultTemplate(PushTemplate.DEFAULT);
     // DATB.setNotificationSound("soundName");
     // DATB.setFirebaseAnalytics(true);
-    
+
     DATB.shared.onTokenReceived((token) {
       print('Token >>  $token ');
     });
@@ -157,7 +157,6 @@ class _PageTwoState extends State<PageTwo> {
         focusElevation: 5,
         child: const Icon(Icons.notifications),
         onPressed: () {
-
           // iZooto.setNewsHub();
         },
       ),
@@ -176,7 +175,7 @@ class SecondRoute extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            DATB.addUserProperty("mobile","abcd");
+            DATB.addUserProperty("mobile", "abcd");
 
             Navigator.pop(context);
             // print("Subscribe True");

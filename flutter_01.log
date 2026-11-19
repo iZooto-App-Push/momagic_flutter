@@ -1,0 +1,68 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter analyze
+
+## exception
+
+_Exception: Exception: analysis server exited with code 254 and output:
+[stderr] /Users/pramodrai/development/flutter/bin/cache/dart-sdk/bin/snapshots/analysis_server.dart.snapshot: Error: Error when reading '/Users/pramodrai/development/flutter/bin/cache/dart-sdk/bin/snapshots/analysis_server.dart.snapshot': No such file or directory
+
+```
+```
+
+## flutter doctor
+
+```
+[32m[✓][39m Flutter (Channel stable, 3.24.3, on macOS 27.2.1 26B131 darwin-arm64, locale en-GB)
+    [32m•[39m Flutter version 3.24.3 on channel stable at /Users/pramodrai/development/flutter
+    [32m•[39m Upstream repository https://github.com/flutter/flutter.git
+    [32m•[39m Framework revision 2663184aa7 (2 years, 2 months ago), 2024-09-11 16:27:48 -0500
+    [32m•[39m Engine revision 36335019a8
+    [32m•[39m Dart version 3.5.3
+    [32m•[39m DevTools version 2.37.3
+
+[33m[!][39m Android toolchain - develop for Android devices (Android SDK version 37.0.0)
+    [32m•[39m Android SDK at /Users/pramodrai/Library/Android/sdk
+    [32m•[39m Platform android-37.0, build-tools 37.0.0
+    [32m•[39m ANDROID_SDK_ROOT = /Users/pramodrai/Library/Android/sdk
+    [31m✗[39m Android SDK file not found: /Users/pramodrai/Library/Android/sdk/build-tools/37.0.0/aapt.
+    [32m•[39m Try re-installing or updating your Android SDK,
+      visit https://flutter.dev/to/macos-android-setup for detailed instructions.
+
+[33m[!][39m Xcode - develop for iOS and macOS
+    [31m✗[39m Xcode installation is incomplete; a full installation is necessary for iOS and macOS development.
+      Download at: https://developer.apple.com/xcode/
+      Or install Xcode via the App Store.
+      Once installed, run:
+        sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+        sudo xcodebuild -runFirstLaunch
+    [32m•[39m CocoaPods version 1.14.3
+
+[32m[✓][39m Chrome - develop for the web
+    [32m•[39m Chrome at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+
+[32m[✓][39m Android Studio (version 2026.2)
+    [32m•[39m Android Studio at /Applications/Android Studio.app/Contents
+    [32m•[39m Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    [32m•[39m Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+    [32m•[39m Java version OpenJDK Runtime Environment (build 25.0.3+-15898627-b508.16)
+
+[32m[✓][39m VS Code (version 1.147.0)
+    [32m•[39m VS Code at /Applications/Visual Studio Code.app/Contents
+    [32m•[39m Flutter extension version 3.146.0
+
+[32m[✓][39m Connected device (3 available)
+    [32m•[39m Pixel 4a (mobile) • 18261JEC201175 • android-arm64  • Android 13 (API 33)
+    [32m•[39m macOS (desktop)   • macos          • darwin-arm64   • macOS 27.2.1 26B131 darwin-arm64
+    [32m•[39m Chrome (web)      • chrome         • web-javascript • Google Chrome 157.0.8103.79
+
+[32m[✓][39m Network resources
+    [32m•[39m All expected network resources are available.
+
+[33m![39m Doctor found issues in 2 categories.
+```

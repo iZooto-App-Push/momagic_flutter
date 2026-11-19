@@ -39,7 +39,6 @@ const String CHANNEL_NAME = "setNotificationChannelName";
 const String NAVIGATE_SETTING = "navigateToSettings";
 const String DEFAULT_WEB_VIEW = "defaultWebView";
 
-
 // handle the text-overlay template
 enum PushTemplate {
   DEFAULT,
@@ -67,22 +66,22 @@ class DATB {
 
   // For Android init (optional defultWebView boolean parameter)
   static Future<void> androidInit({bool isDefaultWebView = false}) async {
-    await _channel.invokeMethod(ANDROIDINIT, {DEFAULT_WEB_VIEW: isDefaultWebView});
+    await _channel
+        .invokeMethod(ANDROIDINIT, {DEFAULT_WEB_VIEW: isDefaultWebView});
   }
 
-static addUserProperty(String key, dynamic value) async {
-  if (Platform.isIOS) {
-    _channel.invokeMethod(ADDUSERPROPERTIES, {
-      'key': key,
-      'value': value,
-    });
-  } else {
-    Map<String, dynamic> addValue = {};
-    addValue[key] = value;
-    _channel.invokeMethod(PROPERTIES, addValue);
+  static addUserProperty(String key, dynamic value) async {
+    if (Platform.isIOS) {
+      _channel.invokeMethod(ADDUSERPROPERTIES, {
+        'key': key,
+        'value': value,
+      });
+    } else {
+      Map<String, dynamic> addValue = {};
+      addValue[key] = value;
+      _channel.invokeMethod(PROPERTIES, addValue);
+    }
   }
-}
-
 
   // For lagecy method used in iOS, this method will be deprecated asap
   static addUserProperties(String key, String value) async {

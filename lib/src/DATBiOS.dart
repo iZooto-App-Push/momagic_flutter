@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' hide MessageHandler;
 import 'package:momagic_flutter/src/DATBConnection.dart';
+
 typedef WillPresentHandler = Future<bool> Function(Map<String, dynamic>);
+
 class DATBiOS extends PushConnector {
   final MethodChannel _channel = const MethodChannel('izooto_flutter');
   MessageHandler? _onMessage;
@@ -25,14 +27,14 @@ class DATBiOS extends PushConnector {
   Future<dynamic> _handleMethod(MethodCall call) async {
     switch (call.method) {
       case 'onToken':
-       return token.value = call.arguments;
+        return token.value = call.arguments;
       case 'receivedPayload':
         return receivePayload.value = call.arguments;
       case 'openNotification':
         return openNotification.value = call.arguments;
       case 'handleLandingURL':
-       return openLandingURL.value = call.arguments;
-     
+        return openLandingURL.value = call.arguments;
+
       case 'onMessage':
         return _onMessage!(call.arguments.cast<String, dynamic>());
       case 'onLaunch':
@@ -50,7 +52,7 @@ class DATBiOS extends PushConnector {
 
   /// Handler that returns true/false to decide if push alert should be displayed when in foreground.
   /// Returning true will delay onMessage callback until user actually clicks on it
- // late WillPresentHandler shouldPresent;
+  // late WillPresentHandler shouldPresent;
 
   // @override
   // final isDisabledByUser = ValueNotifier("");
@@ -73,11 +75,4 @@ class DATBiOS extends PushConnector {
   @override
   // TODO: implement isDisabledByUser
   ValueNotifier<bool> get isDisabledByUser => throw UnimplementedError();
-
-
-
-
-
-
-
 }
