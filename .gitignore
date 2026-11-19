@@ -1,0 +1,75 @@
+# Flutter build files
+/build/
+/ios/Flutter/App.framework
+/ios/Flutter/Flutter.framework
+/ios/Flutter/Flutter.podspec
+/ios/Flutter/engine
+/ios/Flutter/flutter_assets
+/ios/.generated
+
+# CocoaPods
+ios/Pods/
+ios/Podfile.lock
+
+# Dart/Flutter package files
+.packages
+.pub-cache/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-versions
+.flutter-version
+
+# Web
+web/.dart_tool/
+web/.packages
+
+# Android build files
+/android/.gradle/
+/android/.idea/
+/android/local.properties
+/android/app/debug.keystore
+/android/app/*.keystore
+/android/app/build/
+
+# IntelliJ IDE files
+*.iml
+.idea/
+
+# VS Code settings
+.vscode/
+
+# macOS
+macos/Flutter/ephemeral
+macos/Flutter/Flutter.podspec
+macos/Flutter/GeneratedPluginRegistrant.swift
+macos/.flutter-plugins
+macos/.flutter-plugins-dependencies
+
+# Windows
+windows/flutter/ephemeral
+
+# Linux
+linux/flutter/ephemeral
+
+# Generated plugin registrant files
+*.dart_tool/
+*.flutter-plugins
+*.flutter-plugins-dependencies
+*.packages
+
+# JetBrains IDEs
+.idea/
+*.iml
+
+
+# Firebase
+google-services.json
+**/google-services.json
+
+# Exclude lock files (optional)
+
+pubspec.lock
