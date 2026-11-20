@@ -49,7 +49,7 @@ import MomagiciOSSDK
             }
             
             let momagicInitSettings = [AppConstant.IZ_PLUGIN_AUTO_PROMPT: true,AppConstant.IZ_PLUGIN_IS_WEBVIEW: false,AppConstant.IZ_PLUGIN_PROVISIONAL_AUTH:false]
-            DATB.initialisation(momagic_app_id: appId, application: UIApplication.shared,  initSetting:momagicInitSettings)
+            DATB.initialisation(momagic_app_id: appId, application: UIApplication.shared,  momagicInitSetting:momagicInitSettings)
             UNUserNotificationCenter.current().delegate = self
             DATB.notificationOpenDelegate = self
             break;
@@ -81,7 +81,7 @@ import MomagiciOSSDK
             break;
             
         case AppConstant.IZ_PLUGIN_NAVIGATE_TO_SETTING :
-            DATB.checkNotificationEnable()
+            DATB.navigateToSettings()
             break;
         case AppConstant.IZ_PLUGIN_GET_NOTIFICATION_FEED:
             guard let map = call.arguments as? Dictionary<String, Any> else {

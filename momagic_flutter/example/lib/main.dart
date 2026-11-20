@@ -3,9 +3,15 @@
 import 'dart:io';
 import 'package:momagic_flutter/momagic_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:async';
 
-void main() => runApp(MyApp());
+const MethodChannel platform = MethodChannel('iZooto-flutter');
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -32,6 +38,21 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool _hasNavigated = false;
+
+  void _navigateToSecondRoute() {
+    if (_hasNavigated || !mounted) return;
+    _hasNavigated = true;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SecondRoute(),
+      ),
+    ).then((_) {
+      _hasNavigated = false;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -71,15 +92,35 @@ class _HomeState extends State<Home> {
   void initMethod() async {
     if (Platform.isIOS) {
       DATB.iOSInit(
-          appId: "d7e40672e1d6bad8c3ef6ecb0291cf4ab8e11b87"); // for iOS
+          appId: "6d6292461db5888f4c10172c0767541a40e2175c"); // for iOS
+
+      _handleNotification();
+    } else {
+      DATB.androidInit();
     }
 
-    DATB.androidInit();
+    // Register listeners first
+    DATB.shared.onTokenReceived((token) {
+      debugPrint("Device Token: $token");
+    });
 
-    // DATB.androidInit(isDefaultWebView: true);
-    
+    DATB.shared.onNotificationReceived((payload) {
+      debugPrint("Notification Received: $payload");
+    });
+
+    DATB.shared.onNotificationOpened((data) {
+      debugPrint("Notification Opened: $data");
+      _navigateToSecondRoute();
+    });
+
+    DATB.shared.onWebView((landingUrl) {
+      debugPrint("Landing URL: $landingUrl");
+    });
+
+    // Request permission after registering listeners
     DATB.promptForPushNotifications();
 
+    // DATB.androidInit(isDefaultWebView: true);
     //DATB.setSubscriberId("79057172");
 
     // DATB.setNotificationChannelName("channelName");
@@ -88,10 +129,10 @@ class _HomeState extends State<Home> {
 
     // AddEvent
     // Map<String, Object> eventValue = {};
-    // eventValue['name'] = 'Alice';         
-    // eventValue['age'] = 25;              
-    // eventValue['isStudent'] = true;        
-    // eventValue['skills'] = ['Dart', 'Flutter']; 
+    // eventValue['name'] = 'Alice';
+    // eventValue['age'] = 25;
+    // eventValue['isStudent'] = true;
+    // eventValue['skills'] = ['Dart', 'Flutter'];
     // DATB.addEvent("eventName", eventValue);
 
     // Add Tag
@@ -99,7 +140,7 @@ class _HomeState extends State<Home> {
     // DATB.addTag(topicName);
 
     // AddUserProperties
-     DATB.addUserProperty("tuesday","2026-07-20 16:04:05");
+    DATB.addUserProperty("tuesday", "2026-07-20 16:04:05");
 
     // Remove TAG
     // DATB.removeTag(topicName);
@@ -108,26 +149,22 @@ class _HomeState extends State<Home> {
     // DATB.setDefaultTemplate(PushTemplate.DEFAULT);
     // DATB.setNotificationSound("soundName");
     // DATB.setFirebaseAnalytics(true);
-    
-    DATB.shared.onTokenReceived((token) {
-      print('Token >>  $token ');
-    });
+  }
 
-    DATB.shared.onNotificationReceived((payload) {
-      print('PayLoad >>  $payload');
-    });
+  void _handleNotification() async {
+    try {
+      String? value = await platform.invokeMethod("OpenNotification");
+      if (!mounted) return;
 
-    DATB.shared.onNotificationOpened((data) {
-      print('DeepLink >>  $data');
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const SecondRoute()));
-    });
-
-    DATB.shared.onWebView((landingUrl) {
-      print('Landing URL >>  $landingUrl');
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const SecondRoute()));
-    });
+      if (value != null && value.isNotEmpty) {
+        debugPrint('MoMagic Killed State iOS Notification: $value');
+        Future.delayed(Duration.zero, () {
+          _navigateToSecondRoute();
+        });
+      }
+    } catch (e) {
+      debugPrint('Error in OpenNotification: $e');
+    }
   }
 }
 
@@ -157,7 +194,6 @@ class _PageTwoState extends State<PageTwo> {
         focusElevation: 5,
         child: const Icon(Icons.notifications),
         onPressed: () {
-
           // iZooto.setNewsHub();
         },
       ),
@@ -176,7 +212,7 @@ class SecondRoute extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            DATB.addUserProperty("mobile","abcd");
+            DATB.addUserProperty("mobile", "abcd");
 
             Navigator.pop(context);
             // print("Subscribe True");

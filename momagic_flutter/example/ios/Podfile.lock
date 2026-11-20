@@ -1,9 +1,9 @@
 PODS:
   - Flutter (1.0.0)
-  - momagic_flutter (0.0.2):
+  - momagic_flutter (1.0.3-dev):
     - Flutter
     - MomagiciOSSDK
-  - MomagiciOSSDK (3.0.1)
+  - MomagiciOSSDK (3.0.4)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -21,10 +21,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/momagic_flutter/ios"
 
 SPEC CHECKSUMS:
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  momagic_flutter: 5e1b1364af3dc150120ae541c92fa7814ac9e267
-  MomagiciOSSDK: 5c23bf7687ab5f47651fa4f6096680b10053c3cf
+  Flutter: 71a624a5bc0c04062bf19101d501e466baf2fb47
+  momagic_flutter: fc52ecb234927075e71eb1da4c13f5416272038e
+  MomagiciOSSDK: 33771688bb3204a260223b512afdf7f9ebf3268e
 
-PODFILE CHECKSUM: 16ad369f2cd5ad2ca0cc1697e4bde6c16a980fd3
+PODFILE CHECKSUM: dae5b6981765bef6d4e2ab42dd43e5025b55b0b4
 
 COCOAPODS: 1.16.2
